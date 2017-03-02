@@ -5,7 +5,8 @@ package letcode;
  */
 public class Code461 {
 
-    public int hammingDistance(int x, int y) {
+    public static int hammingDistance(int x, int y) {
+
         String strX = Integer.toBinaryString(x);
         String strY = Integer.toBinaryString(y);
         char[] charsX = strX.toCharArray();
@@ -20,26 +21,25 @@ public class Code461 {
                 }
             }
         }else {
-            for (int i = max - 1; i >= max - min; i--) {
-                for (int j = min - 1; j >= 0; j--) {
-                    if (charsX.length > charsY.length) {
-                        if (charsX[i] != charsY[j]) {
-                            result++;
-                        }
-                    } else {
-                        if (charsX[j] != charsY[i]) {
-                            result++;
-                        }
-                    }
-                }
-            }
-            for (int i = max - min - 1; i >= 0; i--) {
+            int i,j;
+            for (i = max - 1,j = min - 1; i >= max - min; i--,j--) {
                 if (charsX.length > charsY.length) {
-                    if (charsX[i] == '1') {
+                    if (charsX[i] != charsY[j]) {
                         result++;
                     }
                 } else {
-                    if (charsY[i] == '1') {
+                    if (charsX[j] != charsY[i]) {
+                        result++;
+                    }
+                }
+            }
+            for (int k = max - min - 1; k >= 0; k--) {
+                if (charsX.length > charsY.length) {
+                    if (charsX[k] == '1') {
+                        result++;
+                    }
+                } else {
+                    if (charsY[k] == '1') {
                         result++;
                     }
                 }
@@ -47,5 +47,5 @@ public class Code461 {
         }
         return result;
     }
-
 }
+
